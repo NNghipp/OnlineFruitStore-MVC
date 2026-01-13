@@ -2,12 +2,12 @@
 
 Đây là dự án **demo nhỏ** mô phỏng cửa hàng bán trái cây, được xây dựng bằng **ASP.NET Core MVC**.
 
-## 📝 Giới Thiệu
-*   **Chức năng chính**: Cho phép xem danh sách và "mua" trái cây theo kiểu "trá hình" (mô phỏng quy trình, không thanh toán thực).
-*   **Trạng thái dự án**: 🚧 Hệ thống vẫn đang trong quá trình **cập nhật từ từ** và sửa lỗi, nên có thể vẫn còn tồn tại bugs.
+##  Giới Thiệu
+*   **Chức năng chính**: Cho phép xem danh sách và "mua" trái cây.
+*   **Trạng thái dự án**: Hệ thống vẫn đang trong quá trình cập nhật từ từ và sửa lỗi, nên có thể vẫn còn tồn tại bugs.
 *   **Kiến trúc**: Tuân theo mô hình 3 lớp (3-Layer Architecture) và Repository Pattern.
 
-## 🚀 Công Nghệ Sử Dụng (Tech Stack)
+## Tech Stack
 
 *   **Backend**: C# .NET 8, ASP.NET Core MVC
 *   **Database**: SQLite (Entity Framework Core Code-First)
@@ -15,7 +15,7 @@
 *   **Architecture**: 3-Layer (Business, Repositories, Services) + Repository Pattern
 *   **Tools**: Visual Studio Code, .NET CLI
 
-## 📂 Cấu Trúc Dự Án
+## Plaintext
 
 ```
 MyStore/
@@ -132,7 +132,7 @@ Khi chạy lần đầu, ứng dụng sẽ tự động tạo database (`MyStore
     ```bash
     dotnet run --project MyStore.WebApp
     ```
-    *Truy cập vào: `http://localhost:5000`*
+    *Truy cập vào: `http://localhost:5258`*
 
 ### Các Lần Sau
 Chỉ cần chạy lệnh sau để khởi động server:
@@ -161,9 +161,6 @@ dotnet watch run --project MyStore.WebApp
 
 ### 4. Tài Khoản Thành Viên (Members)
 - Truy cập menu **Members** để xem danh sách thành viên (Admin/User).
-- **Tài khoản mẫu**:
-  - Admin: `admin@mystore.com`
-  - User: `user@mystore.com`
 
 ---
 
