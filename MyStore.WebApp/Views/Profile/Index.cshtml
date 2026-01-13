@@ -1,0 +1,165 @@
+@model MyStore.Business.Entities.AccountMember
+
+@{
+    ViewData["Title"] = "Thông Tin Cá Nhân";
+}
+
+<div class="profile-page">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <div class="profile-sidebar card shadow-sm">
+                <div class="card-body text-center py-4">
+                    <div class="profile-avatar mb-3">
+                        <i class="bi bi-person-circle display-1 text-muted"></i>
+                    </div>
+                    <h5 class="mb-1">@Model.FullName</h5>
+                    <p class="text-muted mb-3">
+                        <i class="bi bi-shield-check"></i> @Model.MemberRole
+                    </p>
+                    <hr>
+                    <nav class="profile-nav">
+                        <a href="@Url.Action("Index")" class="profile-nav-link active">
+                            <i class="bi bi-person"></i> Thông tin
+                        </a>
+                        <a href="@Url.Action("ChangePassword")" class="profile-nav-link">
+                            <i class="bi bi-key"></i> Đổi mật khẩu
+                        </a>
+                        <a href="@Url.Action("UpdateContact")" class="profile-nav-link">
+                            <i class="bi bi-pencil"></i> Cập nhật liên hệ
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle"></i> @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <div class="profile-content card shadow-sm">
+                <div class="card-header profile-header">
+                    <h4 class="mb-0"><i class="bi bi-person-vcard"></i> Thông Tin Cá Nhân</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="profile-info-item">
+                                <label class="text-muted"><i class="bi bi-hash"></i> Mã thành viên</label>
+                                <p class="fs-5 fw-bold mb-0">#@Model.MemberID</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="profile-info-item">
+                                <label class="text-muted"><i class="bi bi-person"></i> Họ và tên</label>
+                                <p class="fs-5 fw-bold mb-0">@Model.FullName</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="profile-info-item">
+                                <label class="text-muted"><i class="bi bi-envelope"></i> Email</label>
+                                <p class="fs-5 mb-0">@Model.EmailAddress</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="profile-info-item">
+                                <label class="text-muted"><i class="bi bi-telephone"></i> Số điện thoại</label>
+                                <p class="fs-5 mb-0">@(Model.PhoneNumber ?? "Chưa cập nhật")</p>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="profile-info-item">
+                                <label class="text-muted"><i class="bi bi-geo-alt"></i> Địa chỉ</label>
+                                <p class="fs-5 mb-0">@(Model.Address ?? "Chưa cập nhật")</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="profile-info-item">
+                                <label class="text-muted"><i class="bi bi-shield"></i> Vai trò</label>
+                                <p class="fs-5 mb-0">
+                                    <span class="badge bg-success">@Model.MemberRole</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-flex gap-2">
+                        <a asp-action="UpdateContact" class="btn btn-fruit-primary">
+                            <i class="bi bi-pencil"></i> Cập Nhật Thông Tin
+                        </a>
+                        <a asp-action="ChangePassword" class="btn btn-outline-secondary">
+                            <i class="bi bi-key"></i> Đổi Mật Khẩu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile-page {
+        padding: 1rem 0;
+    }
+    
+    .profile-sidebar {
+        border-radius: 15px;
+        border: none;
+    }
+    
+    .profile-content {
+        border-radius: 15px;
+        border: none;
+    }
+    
+    .profile-header {
+        background: #3d5a4c;
+        color: white;
+        border-radius: 15px 15px 0 0 !important;
+        padding: 1.25rem;
+    }
+    
+    .profile-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .profile-nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        color: #333;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+    }
+    
+    .profile-nav-link:hover,
+    .profile-nav-link.active {
+        background: var(--fruit-light);
+        color: var(--fruit-primary);
+    }
+    
+    .profile-info-item {
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+        height: 100%;
+    }
+    
+    .profile-info-item label {
+        display: block;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+</style>

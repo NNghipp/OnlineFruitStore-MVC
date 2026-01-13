@@ -40,8 +40,16 @@ namespace MyStore.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Check duplicate name
+                var existingCategories = _categoryService.GetAllCategories();
+                if (existingCategories.Any(c => c.CategoryName.Equals(category.CategoryName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    TempData["ErrorMessage"] = $"Danh mục \"{category.CategoryName}\" đã tồn tại! Vui lòng chọn tên khác.";
+                    return View(category);
+                }
+
                 _categoryService.CreateCategory(category);
-                TempData["SuccessMessage"] = "Category created successfully!";
+                TempData["SuccessMessage"] = "Tạo danh mục thành công!";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -68,8 +76,18 @@ namespace MyStore.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
+                // Check duplicate name (trừ category hiện tại)
+                var existingCategories = _categoryService.GetAllCategories();
+                if (existingCategories.Any(c => 
+                    c.CategoryName.Equals(category.CategoryName, StringComparison.OrdinalIgnoreCase) && 
+                    c.CategoryID != category.CategoryID))
+                {
+                    TempData["ErrorMessage"] = $"Danh mục \"{category.CategoryName}\" đã tồn tại! Vui lòng chọn tên khác.";
+                    return View(category);
+                }
+
                 _categoryService.UpdateCategory(category);
-                TempData["SuccessMessage"] = "Category updated successfully!";
+                TempData["SuccessMessage"] = "Cập nhật danh mục thành công!";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -90,7 +108,7 @@ namespace MyStore.WebApp.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             _categoryService.DeleteCategory(id);
-            TempData["SuccessMessage"] = "Category deleted successfully!";
+            TempData["SuccessMessage"] = "Xóa danh mục thành công!";
             return RedirectToAction(nameof(Index));
         }
     }

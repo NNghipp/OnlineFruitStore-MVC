@@ -21,5 +21,11 @@ namespace MyStore.Business.Entities
 
         [StringLength(50)]
         public string? MemberRole { get; set; }
+
+        [StringLength(20)]
+        public string? PhoneNumber { get; set; }
+
+        [StringLength(500)]
+        public string? Address { get; set; }
     }
 }

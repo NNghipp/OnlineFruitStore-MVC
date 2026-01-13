@@ -1,0 +1,89 @@
+@model MyStore.WebApp.Models.UpdateContactViewModel
+
+@{
+    ViewData["Title"] = "Cập Nhật Thông Tin";
+}
+
+<div class="profile-page">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm profile-content">
+                <div class="card-header profile-header">
+                    <h4 class="mb-0"><i class="bi bi-pencil"></i> Cập Nhật Thông Tin Liên Hệ</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="UpdateContact" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="FullName" class="form-label fw-bold">
+                                    <i class="bi bi-person"></i> Họ và tên *
+                                </label>
+                                <input asp-for="FullName" class="form-control form-control-lg" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="Email" class="form-label fw-bold">
+                                    <i class="bi bi-envelope"></i> Email *
+                                </label>
+                                <input asp-for="Email" class="form-control form-control-lg" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="PhoneNumber" class="form-label fw-bold">
+                                <i class="bi bi-telephone"></i> Số điện thoại
+                            </label>
+                            <input asp-for="PhoneNumber" class="form-control form-control-lg" 
+                                   placeholder="0901234567" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Address" class="form-label fw-bold">
+                                <i class="bi bi-geo-alt"></i> Địa chỉ giao hàng
+                            </label>
+                            <textarea asp-for="Address" class="form-control" rows="3"
+                                      placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-fruit-primary btn-lg">
+                                <i class="bi bi-check"></i> Lưu Thay Đổi
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-arrow-left"></i> Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile-page {
+        padding: 2rem 0;
+    }
+    
+    .profile-content {
+        border-radius: 15px;
+        border: none;
+    }
+    
+    .profile-header {
+        background: #3d5a4c;
+        color: white;
+        border-radius: 15px 15px 0 0 !important;
+        padding: 1.25rem;
+    }
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -22,6 +22,17 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAccountMemberService, AccountMemberService>();
 
+// Configure Session for Shopping Cart
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<MyStore.WebApp.Services.ICartService, MyStore.WebApp.Services.CartService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,9 +45,37 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
+
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Custom short routes
+app.MapControllerRoute(
+    name: "login",
+    pattern: "Login",
+    defaults: new { controller = "Auth", action = "Login" });
+
+app.MapControllerRoute(
+    name: "register",
+    pattern: "Register",
+    defaults: new { controller = "Auth", action = "Register" });
+
+app.MapControllerRoute(
+    name: "logout",
+    pattern: "Logout",
+    defaults: new { controller = "Auth", action = "Logout" });
+
+app.MapControllerRoute(
+    name: "profile",
+    pattern: "Profile/{action=Index}",
+    defaults: new { controller = "Profile" });
+
+app.MapControllerRoute(
+    name: "cart",
+    pattern: "Cart/{action=Index}",
+    defaults: new { controller = "Cart" });
 
 app.MapControllerRoute(
     name: "default",

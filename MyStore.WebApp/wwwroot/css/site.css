@@ -1,3 +1,34 @@
+/* ============================================
+   MyStore - Fresh Fruit Store Theme
+   Color Palette:
+   - Primary Green: #2d8a3e (fresh leaves)
+   - Secondary Orange: #ff6b35 (citrus)
+   - Accent Yellow: #f7c52d (mango)
+   - Danger/Price Red: #e74c3c (strawberry)
+   - Light BG: #f8fdf9 (soft green tint)
+============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --fruit-primary: #2d8a3e;
+  --fruit-primary-dark: #1e6b2d;
+  --fruit-secondary: #ff6b35;
+  --fruit-secondary-dark: #e55a28;
+  --fruit-accent: #f7c52d;
+  --fruit-danger: #e74c3c;
+  --fruit-light: #f8fdf9;
+  --fruit-dark: #1a3d20;
+  --gradient-primary: linear-gradient(135deg, #2d8a3e 0%, #45a355 100%);
+  --gradient-header: linear-gradient(135deg, #2d8a3e 0%, #ff6b35 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(45, 138, 62, 0.9) 0%, rgba(255, 107, 53, 0.8) 100%);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
 html {
   font-size: 14px;
 }
@@ -8,15 +39,614 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--fruit-light);
+  color: #333;
+  margin-bottom: 0;
+}
+
+/* ============================================
+   Header Styles
+============================================ */
+.site-header {
+  background: var(--gradient-header);
+  padding: 1rem 0;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 100;
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: white;
+}
+
+.site-logo-icon {
+  font-size: 2.5rem;
+}
+
+.site-logo-text {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: var(--transition-fast);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.header-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  color: white;
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--fruit-danger);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* User dropdown */
+.user-dropdown {
+  position: relative;
+}
+
+.user-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  min-width: 200px;
+  padding: 0.5rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: var(--transition-normal);
+  z-index: 1000;
+}
+
+.user-dropdown:hover .user-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.user-dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.user-dropdown-menu a:hover {
+  background: var(--fruit-light);
+  color: var(--fruit-primary);
+}
+
+.user-dropdown-menu a i {
+  font-size: 1.1rem;
+  width: 20px;
+}
+
+/* ============================================
+   Navigation Styles
+============================================ */
+.site-nav {
+  background: var(--fruit-dark);
+  padding: 0;
+}
+
+.site-nav .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  padding: 1rem 1.25rem;
+  font-weight: 500;
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.site-nav .navbar-nav .nav-link:hover,
+.site-nav .navbar-nav .nav-link.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.site-nav .navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: var(--fruit-secondary);
+  transition: var(--transition-fast);
+  transform: translateX(-50%);
+}
+
+.site-nav .navbar-nav .nav-link:hover::after {
+  width: 80%;
+}
+
+/* ============================================
+   Button Styles
+============================================ */
+.btn-fruit-primary {
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-fruit-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: white;
+  filter: brightness(1.1);
+}
+
+.btn-fruit-secondary {
+  background: var(--fruit-secondary);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: var(--transition-normal);
+}
+
+.btn-fruit-secondary:hover {
+  background: var(--fruit-secondary-dark);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-add-cart {
+  background: var(--fruit-secondary);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  transition: var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-add-cart:hover {
+  background: var(--fruit-secondary-dark);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* ============================================
+   Hero Section
+============================================ */
+.hero-section {
+  background: var(--gradient-hero), url('/assets/products/banner.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+  border-radius: 0 0 50px 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  opacity: 0.95;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* ============================================
+   Product Card Styles
+============================================ */
+.product-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  height: 100%;
+  border: none;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.product-card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+
+.product-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-normal);
+}
+
+.product-card:hover .product-card-img {
+  transform: scale(1.1);
+}
+
+.product-card-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--fruit-danger);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.product-card-body {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.product-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--fruit-dark);
+  margin-bottom: 0.75rem;
+}
+
+.product-card-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--fruit-danger);
+  margin-bottom: 1rem;
+}
+
+.product-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+/* ============================================
+   Category Card
+============================================ */
+.category-card {
+  background: linear-gradient(135deg, var(--fruit-primary) 0%, var(--fruit-primary-dark) 100%);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  transition: var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.category-card h4 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+/* ============================================
+   Section Titles
+============================================ */
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--fruit-dark);
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--gradient-header);
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+.section-title.text-success {
+  color: var(--fruit-primary) !important;
+}
+
+.section-title.text-danger {
+  color: var(--fruit-danger) !important;
+}
+
+/* ============================================
+   Cart Page
+============================================ */
+.cart-table {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.cart-table thead {
+  background: var(--fruit-primary);
+  color: white;
+}
+
+.cart-table thead th {
+  border: none;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+.cart-table tbody td {
+  vertical-align: middle;
+  padding: 1rem;
+  border-color: #f0f0f0;
+}
+
+.cart-item-img {
+  border: 2px solid #f0f0f0;
+}
+
+.cart-summary {
+  background: white;
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   Footer Styles
+============================================ */
+.site-footer {
+  background: var(--fruit-dark);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.site-footer a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.site-footer a:hover {
+  color: var(--fruit-accent);
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 1.2rem;
+  transition: var(--transition-fast);
+}
+
+.footer-social a:hover {
+  background: var(--fruit-secondary);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* ============================================
+   Form Styles
+============================================ */
+.form-control:focus {
+  border-color: var(--fruit-primary);
+  box-shadow: 0 0 0 0.25rem rgba(45, 138, 62, 0.25);
+}
+
+.form-control {
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}
+
+/* ============================================
+   Checkout Page
+============================================ */
+.bg-fruit-primary {
+  background: var(--fruit-primary) !important;
+}
+
+.bg-fruit-secondary {
+  background: var(--fruit-secondary) !important;
+}
+
+/* ============================================
+   Alert Styles
+============================================ */
+.alert-success {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border: none;
+  color: var(--fruit-primary-dark);
+  border-radius: 12px;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  border: none;
+  color: #721c24;
+  border-radius: 12px;
+}
+
+/* ============================================
+   Table Improvements
+============================================ */
+.table-dark {
+  background: var(--fruit-primary) !important;
+}
+
+/* ============================================
+   Responsive Adjustments
+============================================ */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-section {
+    padding: 2.5rem 0;
+    border-radius: 0 0 30px 30px;
+  }
+
+  .site-logo-text {
+    font-size: 1.3rem;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
+  }
+
+  .header-icon-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+  }
+
+  .product-card-img-wrapper {
+    height: 180px;
+  }
+}
+
+/* ============================================
+   Animations
+============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-card {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.product-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.product-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.product-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.product-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Focus states for accessibility */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--fruit-primary);
 }
 
 html {
   position: relative;
   min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
 }

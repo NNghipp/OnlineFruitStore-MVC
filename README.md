@@ -1,6 +1,11 @@
 # MyStore - Cửa Hàng Trái Cây Trực Tuyến
 
-Dự án website quản lý cửa hàng bán trái cây được xây dựng bằng **ASP.NET Core MVC**, tuân theo kiến trúc 3 lớp (3-Layer Architecture).
+Đây là dự án **demo nhỏ** mô phỏng cửa hàng bán trái cây, được xây dựng bằng **ASP.NET Core MVC**.
+
+## 📝 Giới Thiệu
+*   **Chức năng chính**: Cho phép xem danh sách và "mua" trái cây theo kiểu "trá hình" (mô phỏng quy trình, không thanh toán thực).
+*   **Trạng thái dự án**: 🚧 Hệ thống vẫn đang trong quá trình **cập nhật từ từ** và sửa lỗi, nên có thể vẫn còn tồn tại bugs.
+*   **Kiến trúc**: Tuân theo mô hình 3 lớp (3-Layer Architecture) và Repository Pattern.
 
 ## 🚀 Công Nghệ Sử Dụng (Tech Stack)
 
@@ -13,42 +18,100 @@ Dự án website quản lý cửa hàng bán trái cây được xây dựng b�
 ## 📂 Cấu Trúc Dự Án
 
 ```
-📂 MyStore.sln
-├── 📂 MyStore.Business          # Layer 1: Entities + DbContext
-│   ├── 📂 Entities
-│   │   ├── AccountMember.cs
-│   │   ├── Category.cs
-│   │   └── Product.cs
-│   └── MyStoreContext.cs
-├── 📂 MyStore.Repositories      # Layer 2: Repository Pattern
-│   ├── IRepository.cs
-│   ├── Repository.cs
+MyStore/
+├── .gitignore
+├── MyStore.sln                          # Solution file
+├── README.md
+├── requirements.txt
+├── Database/
+│   └── create_database.sql
+│
+├── MyStore.Business/                    # Layer 1: Entities + DbContext
+│   ├── MyStore.Business.csproj
+│   ├── MyStoreContext.cs                # EF Core DbContext
+│   └── Entities/
+│       ├── AccountMember.cs             # User (ID, Email, Password, Phone, Address)
+│       ├── Category.cs                  # Category model
+│       └── Product.cs                   # Product model
+│
+├── MyStore.Repositories/                # Layer 2: Repository Pattern
+│   ├── MyStore.Repositories.csproj
+│   ├── IRepository.cs                   # Generic interface
+│   ├── Repository.cs                    # Generic implementation
 │   ├── IProductRepository.cs
 │   ├── ProductRepository.cs
 │   ├── ICategoryRepository.cs
 │   ├── CategoryRepository.cs
 │   ├── IAccountMemberRepository.cs
 │   └── AccountMemberRepository.cs
-├── 📂 MyStore.Services          # Layer 3: Business Logic
+│
+├── MyStore.Services/                    # Layer 3: Business Logic
+│   ├── MyStore.Services.csproj
 │   ├── IProductService.cs
 │   ├── ProductService.cs
 │   ├── ICategoryService.cs
 │   ├── CategoryService.cs
 │   ├── IAccountMemberService.cs
 │   └── AccountMemberService.cs
-├── 📂 MyStore.WebApp            # Presentation Layer (MVC)
-│   ├── 📂 Controllers
-│   │   ├── ProductsController.cs
-│   │   ├── CategoriesController.cs
-│   │   └── AccountMembersController.cs
-│   ├── 📂 Views
-│   │   ├── Products (Index, Create, Edit, Details, Delete)
-│   │   ├── Categories (Index, Create, Edit, Details, Delete)
-│   │   └── AccountMembers (Index, Create, Edit, Details, Delete)
-│   ├── appsettings.json
-│   └── Program.cs
-└── 📂 Database
-    └── create_database.sql      # SQL script tạo DB
+│
+└── MyStore.WebApp/                      # Presentation Layer (MVC)
+    ├── MyStore.WebApp.csproj
+    ├── Program.cs                       # Startup & DI config
+    ├── appsettings.json
+    ├── MyStoreDB.db                     # SQLite Database
+    │
+    ├── Controllers/
+    │   ├── HomeController.cs
+    │   ├── ProductsController.cs        # + Image upload, Duplicate check, Filter
+    │   ├── CategoriesController.cs      # + Duplicate check
+    │   ├── CartController.cs            # Shopping cart
+    │   ├── AuthController.cs            # Login, Register, Logout
+    │   ├── ProfileController.cs         # User profile management
+    │   └── AccountMembersController.cs
+    │
+    ├── Models/
+    │   ├── CartItem.cs                  # Shopping cart item
+    │   ├── LoginViewModel.cs            # Login form
+    │   ├── RegisterViewModel.cs         # Register form
+    │   ├── ProfileViewModels.cs         # ChangePassword, UpdateContact
+    │   └── ErrorViewModel.cs
+    │
+    ├── Helpers/
+    │   └── FruitImageHelper.cs          # Image mapping by product name
+    │
+    ├── Services/
+    │   └── CartService.cs               # Session-based cart
+    │
+    ├── Views/
+    │   ├── _ViewImports.cshtml
+    │   ├── _ViewStart.cshtml
+    │   ├── Shared/
+    │   │   ├── _Layout.cshtml           # Main layout
+    │   │   ├── _Header.cshtml           # Header (cart/user icons)
+    │   │   ├── _Nav.cshtml              # Navigation
+    │   │   ├── _Footer.cshtml           # Footer
+    │   │   └── Error.cshtml
+    │   ├── Home/                        # Index, About, Contact, Privacy
+    │   ├── Products/                    # CRUD + Category filter
+    │   ├── Categories/                  # CRUD
+    │   ├── Cart/                        # Index, Checkout
+    │   ├── Auth/                        # Login, Register (social buttons)
+    │   ├── Profile/                     # Index, ChangePassword, UpdateContact
+    │   └── AccountMembers/              # CRUD
+    │
+    └── wwwroot/                         # Static files
+        ├── css/
+        │   └── site.css                 # Fruit theme (green/orange)
+        ├── js/
+        │   └── site.js
+        ├── lib/                         # Bootstrap, jQuery
+        └── assets/
+            └── products/                # Product images
+                ├── apple.png
+                ├── banana.png
+                ├── orange.png
+                ├── peach.jpg
+                └── strawberry.png
 ```
 
 ## 🛠️ Hướng Dẫn Cài Đặt & Chạy Web
@@ -103,4 +166,4 @@ dotnet watch run --project MyStore.WebApp
   - User: `user@mystore.com`
 
 ---
-© 2024 MyStore Fruit Shop. All rights reserved.
+
