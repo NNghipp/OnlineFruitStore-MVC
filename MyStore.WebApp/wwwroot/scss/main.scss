@@ -1,0 +1,98 @@
+// ==========================================================================
+// Main SCSS File - Import tất cả các partial files
+// Compile: sass main.scss ../css/main.css
+// ==========================================================================
+
+// Import partials
+@import 'variables';
+@import 'mixins';
+
+// ==========================================================================
+// Base Styles
+// ==========================================================================
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    color: $text-primary;
+    background-color: $bg-light;
+    line-height: 1.6;
+}
+
+// ==========================================================================
+// Typography
+// ==========================================================================
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-primary;
+    font-weight: 600;
+    margin-bottom: $spacing-md;
+}
+
+a {
+    color: $primary-color;
+    text-decoration: none;
+    @include transition(color);
+
+    &:hover {
+        color: darken($primary-color, 15%);
+    }
+}
+
+// ==========================================================================
+// Components - Ví dụ các component
+// ==========================================================================
+
+.card-custom {
+    background: $bg-white;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    @include box-shadow(2);
+    @include transition(transform);
+
+    &:hover {
+        transform: translateY(-5px);
+        @include box-shadow(3);
+    }
+}
+
+.btn-primary-custom {
+    @include button-style($primary-color);
+}
+
+.btn-success-custom {
+    @include button-style($success-color);
+}
+
+// ==========================================================================
+// Responsive Example
+// ==========================================================================
+
+.container-custom {
+    width: 100%;
+    padding: $spacing-md;
+
+    @include respond-to('md') {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    @include respond-to('lg') {
+        max-width: 960px;
+    }
+
+    @include respond-to('xl') {
+        max-width: 1140px;
+    }
+}

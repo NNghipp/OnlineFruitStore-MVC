@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Trang Chủ";
+    var featuredProducts = ViewBag.FeaturedProducts as List<MyStore.Business.Entities.Product>;
+    var categories = ViewBag.Categories as List<MyStore.Business.Entities.Category>;
+}
+
+<!-- Hero Section -->
+<div class="p-5 mb-4 bg-light rounded-3 text-center" style="background-image: url('/assets/products/banner.jpg'); background-size: cover; background-position: center;">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold text-success">Cửa Hàng Trái Cây Tươi</h1>
+        <p class="col-md-8 fs-4 mx-auto">Chuyên cung cấp trái cây nội địa và nhập khẩu tươi ngon nhất mỗi ngày.</p>
+        <button class="btn btn-success btn-lg" type="button">Mua Ngay</button>
+    </div>
+</div>
+
+<!-- Categories Section -->
+<div class="row mb-5">
+    <div class="col-12 text-center mb-4">
+        <h2 class="fw-bold text-success">Danh Mục Sản Phẩm</h2>
+    </div>
+    @if (categories != null)
+    {
+        foreach (var cate in categories)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 border-success shadow-sm">
+                    <div class="card-body text-center d-flex align-items-center justify-content-center">
+                        <h4 class="card-title text-success m-0">@cate.CategoryName</h4>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<!-- Featured Products Section -->
+<div class="row">
+    <div class="col-12 text-center mb-4">
+        <h2 class="fw-bold text-danger">Sản Phẩm Nổi Bật</h2>
+    </div>
+    @if (featuredProducts != null)
+    {
+        foreach (var item in featuredProducts)
+        {
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="~/assets/products/@item.ImageFile" class="card-img-top" alt="@item.ProductName" style="height: 250px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@item.ProductName</h5>
+                        <p class="card-text fw-bold text-danger fs-5">@string.Format("{0:N0} ₫", item.UnitPrice)</p>
+                        <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-outline-success">Chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,21 @@
+MyStore Web Application Requirements
+
+Prerequisites:
+- .NET 8.0 SDK (or later)
+- Visual Studio Code or Visual Studio 2022
+
+NuGet Packages (Backend):
+- Microsoft.EntityFrameworkCore (8.x)
+- Microsoft.EntityFrameworkCore.Sqlite (8.x)
+- Microsoft.EntityFrameworkCore.Tools (8.x)
+- Microsoft.EntityFrameworkCore.Design (8.x)
+- Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore (8.x)
+
+Frontend Libraries (Included in wwwroot/lib):
+- Bootstrap 5.x
+- jQuery 3.x
+- jQuery Validation
+- jQuery Validation Unobtrusive
+
+Database:
+- SQLite (MyStoreDB.db - automatically created on startup)
